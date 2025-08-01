@@ -1,16 +1,21 @@
+<!-- trae la hora de local -->
 <?php 
 date_default_timezone_set('America/Bogota');
 $ano = date("Y"); ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- libreria de logo de la pestaña -->	
 	<link rel="shortcut icon" href="img/logosis.png">
+<!-- libreria de boostrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<!-- <link rel="stylesheet" type="text/css" href="css/ingreso.css"> -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	<!-- libreria de iconos -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- <link href="css/all.css" rel="stylesheet">  -->
 	<script type="text/javascript" src="js/valida.js"></script>
@@ -30,7 +35,7 @@ $ano = date("Y"); ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-
+<!-- css locales  -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/carne.css">
 	<title>SisErp</title>
@@ -38,26 +43,33 @@ $ano = date("Y"); ?>
 <body>
 	<header>
 		<?php 
+			// requiere la conexion de la base de datos 
 			require_once ('models/conexion.php');
+			// imagen responsiva
 			require_once ('controllers/optimg.php');
+// conexiond de variables 
 			require_once ('controllers/ccof.php');
 			$pg = isset($_GET['pg']) ? $_GET['pg']:NULL;
 			$id = isset($_GET['id']) ? $_GET['id']:NULL;
 			$nu = 2;
 			$alto = "0px";
+			// atributos del tuitulo 
 			require_once 'controllers/titulo.php';
 			$dmd = new conexion();
 			$datmd = $dmd->getOneModV();
+			// titulo 
 			require_once ('views/header2.php');
 		?>
 	</header>
 	<section>
+		<!-- formulario login -->
 		<div class="body">
 			<?php
 				include ("views/vini.php");
 			?>
 		</div>
 	</section>
+			<!-- formulario pie de pagina -->
 	<footer>
 		<?php
 			include ("views/pie.php");
