@@ -9,23 +9,14 @@ $nomusu = isset($_POST['nomusu']) ? $_POST['nomusu']:NULL;
 $idper = isset($_POST['idper']) ? $_POST['idper']:NULL;
 $idfic = isset($_REQUEST['idfic']) ? $_REQUEST['idfic']:NULL;
 $pasusu = isset($_POST['pasusu']) ? $_POST['pasusu']:NULL;
-//$idcen = isset($_POST['idcen']) ? $_POST['idcen']:NULL;
 $actusu = isset($_POST['actusu']) ? $_POST['actusu']:NULL;
 $emausu = isset($_POST['emausu']) ? $_POST['emausu']:NULL;
 $telcan = isset($_POST['telcan']) ? $_POST['telcan']:NULL;
-$noca = isset($_POST['noca']) ? $_POST['noca']:NULL;
-$fotcan = isset($_POST['fotcan']) ? $_POST['fotcan']:NULL;
 
-
-$idficfil = isset($_REQUEST['idficfil']) ? $_REQUEST['idficfil']:NULL;
-$nodocfil = isset($_REQUEST['nodocfil']) ? $_REQUEST['nodocfil']:80546098;
-
-$foto = isset($_FILES['foto']['name']) ? $_FILES['foto']['name']:NULL;
+$nodocfil = isset($_REQUEST['nodocfil']) ? $_REQUEST['nodocfil']:NULL;
 
 $opera = isset($_REQUEST['opera']) ? $_REQUEST['opera']:NULL;
-if($foto){
-    $fotcan = opti($_FILES['foto'], $idusu, 'fcan', "");
-}
+
 
 $ips = isset($_POST['inico']) ? $_POST['inico']:NULL;
 $fps = isset($_POST['finco']) ? $_POST['finco']:NULL;
@@ -39,7 +30,7 @@ if($pg<>1324){
 }
 
 
-//echo $idusu."-".$ndocusu."-".$nomusu."-".$idper."-".$idfic."-".$pasusu."-".$idcen."-".$actusu."-".$opera;
+//echo $idusu."-".$ndocusu."-".$nomusu."-".$idper."-".$idfic."-".$pasusu."-".$actusu."-".$opera;
 
 $musu->setIdusu($idusu);
 //Insertar
@@ -49,11 +40,8 @@ if($opera=="save"){
 	$musu->setIdper($idper);
 	$musu->setPasusu($pasusu);
 	$musu->setEmausu($emausu);
-	//$musu->setIdcen($idcen);
 	$musu->setActusu($actusu);
-	$musu->setFotcan($fotcan);
 	$musu->setTelcan($telcan);
-	$musu->setNoca($noca);
 	if(!$idusu){
 		$musu->save();
 	}else{
@@ -114,8 +102,8 @@ if($opera=="duxf"){
 
 //mostrar todos los datos
 $dat = NULL;
-if($idficfil) $dat = $musu->getAll($idficfil);
-if($nodocfil) $dat = $musu->getAll($nodocfil);
+//if($nodocfil) 
+	$dat = $musu->getAll($nodocfil);
 $dpe = $musu->getPerfil();
 if($idusu){
 	$datOne = $musu->getOne();

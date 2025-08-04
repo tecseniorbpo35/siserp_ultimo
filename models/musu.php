@@ -7,11 +7,8 @@ class Musu{
 	private $idper;
 	private $pasusu;
 	private $emausu;
-	//private $idcen;
 	private $actusu;
-	private $fotcan;
 	private $telcan;
-	private $noca;
 	private $idfic;
 	private $finc;
 	private $idval;
@@ -37,20 +34,11 @@ class Musu{
 	public function getEmausu(){
 		return $this->emausu;
 	}
-	//public function getIdcen(){
-		//return $this->idcen;
-	//}
 	public function getActusu(){
 		return $this->actusu;
 	}
-	public function getFotcan(){
-		return $this->fotcan;
-	}
 	public function getTelcan(){
 		return $this->telcan;
-	}
-	public function getNoca(){
-		return $this->noca;
 	}
 	public function getIdfic($idfic){
 		return $this->$idfic;
@@ -82,14 +70,8 @@ class Musu{
 	public function setEmausu($emausu){
 		$this->emausu=$emausu;
 	}
-	//public function setIdcen($idcen){
-		//$this->idcen=$idcen;
-	//}
 	public function setActusu($actusu){
 		$this->actusu=$actusu;
-	}
-	public function setFotcan($fotcan){
-		$this->fotcan=$fotcan;
 	}
 	public function setTelcan($telcan){
 		$this->telcan=$telcan;
@@ -103,12 +85,11 @@ class Musu{
 	public function setInic($inic){
 		$this->inic=$inic;
 	}
-	public function setNoca($noca){
-		$this->noca=$noca;
-	}
 
 	public function getAll($idfic){
-		$sql="SELECT u.idusu, u.ndocusu, u.nomusu, u.idper, p.nomper, u.pasusu, u.emausu, u.actusu, u.fotcan, u.telcan, u.noca FROM usuario AS u INNER JOIN perfil AS p ON u.idper=p.idper WHERE u.ndocusu='".$idfic."' OR u.nomusu='".$idfic."' OR u.nomusu LIKE '%".$idfic."%'";
+		$sql="SELECT u.idusu, u.ndocusu, u.nomusu, u.idper, p.nomper, u.pasusu, u.emausu, u.actusu, u.telcan FROM usuario AS u INNER JOIN perfil AS p ON u.idper=p.idper";
+		if($idfic)
+			$sql .=" WHERE u.ndocusu='".$idfic."' OR u.nomusu='".$idfic."' OR u.nomusu LIKE '%".$idfic."%'";
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$result = $conexion->prepare($sql);
@@ -118,7 +99,7 @@ class Musu{
 	}
 
 	public function getOne(){
-		$sql = "SELECT u.idusu, u.ndocusu, u.nomusu, u.idper, p.nomper, u.pasusu, u.emausu, u.actusu, u.fotcan, u.telcan, u.noca FROM usuario AS u INNER JOIN perfil AS p ON u.idper=p.idper WHERE u.idusu=:idusu";
+		$sql = "SELECT u.idusu, u.ndocusu, u.nomusu, u.idper, p.nomper, u.pasusu, u.emausu, u.actusu, u.telcan FROM usuario AS u INNER JOIN perfil AS p ON u.idper=p.idper WHERE u.idusu=:idusu";
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$result = $conexion->prepare($sql);
@@ -128,10 +109,10 @@ class Musu{
 		$res=$result->fetchAll(PDO::FETCH_ASSOC);
 		return $res;
 	}
-//ins($ndocusu, $nomusu, $idper, $idfic, $pasusu, $idcen, $actusu);
+//ins($ndocusu, $nomusu, $idper, $idfic, $pasusu, $actusu);
 	public function save($dt=1){
 		try{
-			$sql = "INSERT INTO usuario(idper, ndocusu, nomusu, pasusu, actusu, emausu, telcan, noca, fotcan) VALUES (:idper, :ndocusu, :nomusu, :pasusu, :idcen, :actusu, :emausu, :telcan, :noca, :fotcan)";
+			$sql = "INSERT INTO usuario(idper, ndocusu, nomusu, pasusu, actusu, emausu, telcan) VALUES (:idper, :ndocusu, :nomusu, :pasusu, :actusu, :emausu, :telcan)";
 			$modelo = new conexion();
 			$conexion = $modelo->get_conexion();
 			$result = $conexion->prepare($sql);
@@ -149,8 +130,6 @@ class Musu{
 			$pasusu = sha1(md5($pasusu));
 			$result->bindParam(":pasusu",$pasusu);
 
-			//$idcen=$this->getIdcen();
-			//$result->bindParam(":idcen",$idcen);
 
 			$actusu=$this->getActusu();
 			$result->bindParam(":actusu",$actusu);
@@ -161,11 +140,6 @@ class Musu{
 			$telcan=$this->getTelcan();
 			$result->bindParam(":telcan",$telcan);
 
-			$noca=$this->getNoca();
-			$result->bindParam(":noca",$noca);
-
-			$fotcan=$this->getFotcan();
-			$result->bindParam(":fotcan",$fotcan);
 			$result->execute();
 		}catch(Exception $e){
 			if($dt==1) ManejoError($e);
@@ -178,7 +152,7 @@ class Musu{
 		$pasusu=$this->getPasusu();
 		$sql = "UPDATE usuario SET ndocusu=:ndocusu,nomusu=:nomusu,idper=:idper,";
 		if($pasusu) $sql .= "pasusu=:pasusu,";
-		$sql .= "actusu=:actusu, emausu=:emausu, telcan=:telcan, noca=:noca, fotcan=:fotcan WHERE idusu=:idusu";
+		$sql .= "actusu=:actusu, emausu=:emausu, telcan=:telcan WHERE idusu=:idusu";
 		$modelo = new conexion();
 			$conexion = $modelo->get_conexion();
 			$result = $conexion->prepare($sql);
@@ -198,8 +172,6 @@ class Musu{
 				$pasusu = sha1(md5($pasusu));
 				$result->bindParam(":pasusu",$pasusu);
 			}
-			$idcen=$this->getIdcen();
-			$result->bindParam(":idcen",$idcen);
 
 			$actusu=$this->getActusu();
 			$result->bindParam(":actusu",$actusu);
@@ -209,12 +181,6 @@ class Musu{
 
 			$telcan=$this->getTelcan();
 			$result->bindParam(":telcan",$telcan);
-
-			$noca=$this->getNoca();
-			$result->bindParam(":noca",$noca);
-
-			$fotcan=$this->getFotcan();
-			$result->bindParam(":fotcan",$fotcan);
 			
 			$result->execute();
 		}catch(Exception $e){
@@ -348,7 +314,7 @@ class Musu{
 	}
 	
 	public function getFicUsu($idusu){
-		$sql = "SELECT f.idfic, f.nomfic, f.jornada, f.idcen, f.mun, u.idusu, u.actfic FROM ficha AS f INNER JOIN usufic AS u ON f.idfic=u.idfic WHERE u.idusu=:idusu";
+		$sql = "SELECT f.idfic, f.nomfic, f.jornada, f.mun, u.idusu, u.actfic FROM ficha AS f INNER JOIN usufic AS u ON f.idfic=u.idfic WHERE u.idusu=:idusu";
 		$modelo = new conexion();
 		$conexion = $modelo->get_conexion();
 		$result = $conexion->prepare($sql);

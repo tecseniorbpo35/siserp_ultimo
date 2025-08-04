@@ -1,122 +1,261 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Base de datos: mercado
---
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-07-2025 a las 17:05:39
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
--- --------------------------------------------------------
-DROP DATABASE mercado;
-CREATE DATABASE mercado;
-USE mercado;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
---
--- Estructura de tabla para la tabla acta
---
 
-CREATE TABLE configuracion (
-  idcof int(11) NOT NULL,
-  logcof varchar(255) NOT NULL,
-  titcof varchar(100) NOT NULL,
-  descof varchar(255) DEFAULT NULL,
-  foocof varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Volcado de datos para la tabla configuracion
+-- Base de datos: `siserp`
 --
-
-INSERT INTO configuracion (idcof, logcof, titcof, descof, foocof) VALUES
-(1, 'logoSena.png', 'Mercado', 'Mío', 'Desarrollo de Robinson Rincón<br>Cundinamarca');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla dominio
+-- Estructura de tabla para la tabla `configuracion`
 --
 
-CREATE TABLE dominio (
-  iddom int(11) NOT NULL,
-  nomdom varchar(255) NOT NULL
+CREATE TABLE `configuracion` (
+  `idcof` int(11) NOT NULL,
+  `logcof` varchar(255) NOT NULL,
+  `titcof` varchar(100) NOT NULL,
+  `descof` varchar(255) DEFAULT NULL,
+  `foocof` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla dominio
+-- Volcado de datos para la tabla `configuracion`
 --
 
-INSERT INTO dominio (iddom, nomdom) VALUES
-(1, 'Tipo de Documento');
+INSERT INTO `configuracion` (`idcof`, `logcof`, `titcof`, `descof`, `foocof`) VALUES
+(1, 'logosis.png', 'SISERP', 'Mío', 'Desarrollo Team SISERP 2025<br>SENA');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla modulo
+-- Estructura de tabla para la tabla `dominio`
 --
 
-CREATE TABLE modulo (
-  idmod int(11) NOT NULL,
-  nommod varchar(200) NOT NULL,
-  imgmod varchar(255) DEFAULT NULL,
-  actmod tinyint(1) NOT NULL,
-  idper int(11) DEFAULT NULL,
-  ordmod tinyint(99) NOT NULL,
-  desmod text NOT NULL
+CREATE TABLE `dominio` (
+  `iddom` int(11) NOT NULL,
+  `nomdom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla modulo
+-- Volcado de datos para la tabla `dominio`
 --
 
-INSERT INTO modulo (idmod, nommod, imgmod, actmod, idper, ordmod, desmod) VALUES
+INSERT INTO `dominio` (`iddom`, `nomdom`) VALUES
+(1, 'Tipo de Documento'),
+(5, 'Area'),
+(6, 'Forma de pago'),
+(7, 'Producto'),
+(8, 'Reguladores'),
+(9, 'Transformadores de Aislamiento'),
+(10, 'Autotransformadores'),
+(11, 'UPS Online'),
+(12, 'UPS Interactiva');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modulo`
+--
+
+CREATE TABLE `modulo` (
+  `idmod` int(11) NOT NULL,
+  `nommod` varchar(200) NOT NULL,
+  `imgmod` varchar(255) DEFAULT NULL,
+  `actmod` tinyint(1) NOT NULL,
+  `idper` int(11) DEFAULT NULL,
+  `ordmod` tinyint(99) NOT NULL,
+  `desmod` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `modulo`
+--
+
+INSERT INTO `modulo` (`idmod`, `nommod`, `imgmod`, `actmod`, `idper`, `ordmod`, `desmod`) VALUES
 (1, 'Pedidos', 'img/mod1.png', 1, 4, 8, 'Participa en la elección de tu representante con un solo clic.'),
 (2, 'Configuración', 'img/conf.png', 1, 0, 19, 'Personaliza las opciones del sistema y ajusta los parámetros según las necesidades del centro.');
 
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla pagina
+-- Estructura de tabla para la tabla `pagina`
 --
 
-CREATE TABLE pagina (
-  idpag bigint(20) NOT NULL,
-  nompag varchar(255) NOT NULL,
-  rutpag varchar(255) NOT NULL,
-  mospas tinyint(1) NOT NULL,
-  ordpag int(11) NOT NULL,
-  icopag varchar(255) NOT NULL,
-  idmod int(11) NOT NULL,
-  despag varchar(500) DEFAULT NULL
+CREATE TABLE `pagina` (
+  `idpag` bigint(20) NOT NULL,
+  `nompag` varchar(255) NOT NULL,
+  `rutpag` varchar(255) NOT NULL,
+  `mospas` tinyint(1) NOT NULL,
+  `ordpag` int(11) NOT NULL,
+  `icopag` varchar(255) NOT NULL,
+  `idmod` int(11) NOT NULL,
+  `despag` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Volcado de datos para la tabla pagina
+-- Volcado de datos para la tabla `pagina`
 --
 
-INSERT INTO pagina (idpag, nompag, rutpag, mospas, ordpag, icopag, idmod, despag) VALUES
+INSERT INTO `pagina` (`idpag`, `nompag`, `rutpag`, `mospas`, `ordpag`, `icopag`, `idmod`, `despag`) VALUES
 (1102, 'Datos personales', 'views/vdpe.php', 2, 1, 'fa fa-solid fa-user', 1, ''),
-(1111, 'Página', 'views/vpag.php', 1, 42, 'fa fa-solid fa-file-lines', 2, ''),
-(1112, 'Perfil', 'views/vpef.php', 1, 43, 'fa fa-solid fa-address-card', 2, ''),
-(1113, 'Usuarios', 'views/vusu.php', 1, 21, 'fa fa-solid fa-users', 2, ''),
-(1114, 'Configuración', 'views/vcon.php', 1, 46, 'fa fa-solid fa-gear', 2, ''),
-(1115, 'Dominio', 'views/vdom.php', 1, 44, 'fa fa-brands fa-dochub', 2, ''),
-(1116, 'Valor', 'views/vval.php', 1, 45, 'fa fa-solid fa-box-archive', 2, ''),
-(1120, 'Módulo', 'views/vmod.php', 1, 2, 'fa fa-solid fa-boxes-stacked', 2, '');
+(1111, 'Página', 'views/vpag.php', 1, 42, 'fa fa-solid fa-file-lines', 3, ''),
+(1112, 'Perfil', 'views/vpef.php', 1, 43, 'fa fa-solid fa-address-card', 3, ''),
+(1113, 'Usuarios', 'views/vusu.php', 1, 21, 'fa fa-solid fa-users', 3, ''),
+(1114, 'Configuración', 'views/vcon.php', 1, 46, 'fa fa-solid fa-gear', 3, ''),
+(1115, 'Dominio', 'views/vdom.php', 1, 44, 'fa fa-brands fa-dochub', 3, ''),
+(1116, 'Valor', 'views/vval.php', 1, 45, 'fa fa-solid fa-box-archive', 3, ''),
+(1120, 'Módulo', 'views/vmod.php', 1, 2, 'fa fa-solid fa-boxes-stacked', 3, ''),
+(1200, 'Certificado 1', 'views/vcvh.php', 1, 15, 'fa fa-solid fa-user', 1, ''),
+(1202, 'Vot1', 'views/vvvc.php', 1, 14, 'fa fa-solid fa-user', 1, ''),
+(1203, 'Vot 2', 'views/vvot.php', 2, 2, 'fa fa-solid fa-check-to-slot ', 1, ''),
+(1204, 'Visualizar 1', 'views/vvpr.php', 2, 73, 'fa fa-regular fa-eye', 1, ''),
+(1205, 'Certificado 2', 'views/vcer.php', 1, 3, 'fa fa-solid fa-print', 1, ''),
+(1206, 'Candi 1', 'views/vdpc.php', 1, 11, 'fa fa-solid fa-user-tie', 1, ''),
+(1207, 'Propuesta', 'views/vpro.php', 2, 12, 'fa fa-regular fa-clipboard', 1, ''),
+(1208, 'Resultado', 'views/vrvo.php', 1, 23, 'fa fa-solid fa-square-poll-vertical', 1, ''),
+(1209, 'cc1', 'views/vcen.php', 2, 41, 'fa fa-solid fa-industry', 3, ''),
+(1210, 'Visualizar 3', 'views/vfic.php', 2, 22, 'fa fa-solid fa-hashtag', 3, ''),
+(1211, 'Canvo 1', 'views/vcav.php', 1, 11, 'fa fa-solid fa-user', 1, ''),
+(1212, 'Novo', 'views/vnvv.php', 1, 12, 'fa fa-solid fa-print', 1, ''),
+(1213, 'Resultado 2', 'views/vrcv.php', 1, 13, 'fa fa-solid fa-user', 1, ''),
+(1217, 'Acta', 'views/vact.php', 2, 71, 'fa fa-solid fa-file', 1, ''),
+(1218, 'Formato de cot', 'views/vfpro.php', 2, 72, 'fa fa-solid fa-file-contract', 1, ''),
+(1219, 'Carga masiva', 'views/vcusu.php', 2, 24, 'fa fa-solid fa-download', 3, ''),
+(1311, 'Inexistente ', 'views/vina.php', 1, 4, 'fa fa fa-regular fa-calendar-days', 5, ''),
+(1323, 'No votantes', 'views/vnvot.php', 1, 3, 'fa fa fa-regular fa-calendar-days', 1, ''),
+(1324, 'Datos Personales', 'views/vdp.php', 1, 1, 'fa fa-solid fa-user-tie  ', 4, ''),
+(1325, 'Registro E/S', 'views/vres.php', 1, 1, 'fa fa-solid fa-arrows-rotate', 2, ''),
+(1404, 'Minuta', 'views/vmin.php', 1, 5, 'fa fa-solid fa-file-pen', 2, ''),
+(1405, 'E/S', 'views/vcanusu.php', 1, 1, 'fa fa-solid fa-clock', 2, ''),
+(1406, 'Elementos', 'views/vele.php', 1, 2, 'fa fa-solid fa-boxes-stacked', 6, ''),
+(1407, 'Deserción', 'views/vdsr.php', 2, 9, 'fa fa-solid fa-ban', 5, ''),
+(1503, 'Préstamo Elementos', 'views/vpre.php', 1, 9, 'fa fa-solid fa-volleyball', 6, ''),
+(1504, 'Carga Masiva Elementos', 'views/vcele.php', 1, 47, 'fa fa-solid fa-volleyball', 6, ''),
+(1505, 'Ambientes', 'views/vpam.php', 1, 54, 'fa fa-solid fa-school', 6, ''),
+(1506, 'Horario', 'views/vhor.php', 1, 1, 'fa fa-regular fa-calendar-days', 12, ' gfuytityi'),
+(1507, 'Carga Masiva', 'views/vcmas.php', 1, 2, 'fa fa-solid fa-download', 12, ''),
+(1508, 'Actividad', 'views/vatse.php', 2, 3, 'fa fa-solid fa-file-signature', 12, ''),
+(1509, 'Agenda', 'views/vage.php', 2, 4, 'fa fa-solid fa-file-invoice', 12, ''),
+(1510, 'Competencia', 'views/vcom.php', 2, 5, 'fa fa-solid fa-folder-open', 12, ''),
+(1511, 'Evaluación Sesión', 'views/vevs.php', 2, 6, 'fa fa-solid fa-file-pen', 12, ''),
+(1512, 'Plan de sesion', 'views/vpse.php', 2, 7, 'fa fa-regular fa-file-lines', 12, ''),
+(1513, 'Resultado por intructor', 'views/vrsins.php', 1, 8, 'fa fa-solid fa-file-circle-check', 12, ''),
+(1514, 'Sesión Creación instructor', 'views/vscins.php', 2, 9, 'fa fa-solid fa-list', 12, ''),
+(1515, 'Sesión seguimiento', 'views/vsseg.php', 1, 10, 'fa fa-solid fa-list-check', 12, ''),
+(1516, 'Reporte Horario por persona', 'views/vrphor.php', 2, 11, 'fa fa-solid fa-file-lines', 12, ''),
+(1517, 'Horario por persona', 'views/vhxp.php', 1, 12, 'fa fa-solid fa-calendar-check', 12, ''),
+(1518, 'Reporte Horario por ficha', 'views/vrphfc.php', 2, 13, 'fa fa-solid fa-file-lines', 12, ''),
+(1519, 'Reporte Horario por Aula', 'views/vrphau.php', 2, 14, 'fa fa-solid fa-file-lines', 12, ''),
+(1520, 'Reporte Horario general', 'views/vrphg.php', 2, 15, 'fa fa-solid fa-file-lines', 12, ''),
+(1521, 'Reporte de Agenda', 'views/vrpage.php', 2, 16, 'fa fa-solid fa-file-lines', 12, ''),
+(1522, 'Reporte Plan de Sesión', 'views/vrppses.php', 2, 17, 'fa fa-solid fa-file-lines', 12, ''),
+(1523, 'Reporte Acta General', 'views/vrpacg.php', 2, 18, 'fa fa-solid fa-file-lines', 12, ''),
+(1524, 'Ubicación', 'views/vubi.php', 1, 19, 'fa fa-solid fa-location-dot', 3, ''),
+(1525, 'Área', 'views/vare.php', 1, 20, 'fa fa-solid fa-chart-area', 12, ''),
+(1526, 'Usuario por ficha', 'views/vuxfi.php', 2, 21, 'fa fa-solid fa-user ', 3, ''),
+(1527, 'Programa', 'views/vprg.php', 1, 22, 'fa fa-solid fa-file', 12, ''),
+(1528, 'Resultado', 'views/vrsl.php', 2, 23, 'fa fa-solid fa-user ', 12, ''),
+(1529, 'Programa por Competencia', 'views/vprxcm.php', 2, 24, 'fa fa-solid fa-user ', 12, ''),
+(1530, 'Reportes', 'views/vrep.php', 1, 20, 'fa fa-solid fa-file-lines', 12, ''),
+(1531, 'Aula', 'views/vaula.php', 2, 2, 'fa fa-solid fa-landmark', 3, ''),
+(1532, 'Prestamo Aula', 'views/vpraul.php', 1, 15, 'fa fa-solid fa-landmark ', 6, ''),
+(1533, 'Histórico Aulas', 'views/vhaul.php', 1, 10, 'fa fa-solid fa-door-open', 6, ''),
+(1534, 'Bitacora', 'views/vbit.php', 1, 1, 'fa fa-solid fa-file-lines ', 13, 'j agsfyusvaduyvuyadvu gugrjf rgsrdg'),
+(1535, 'Consentimiento', 'views/vetp.php', 1, 2, 'fa fa-solid fa-file-lines ', 13, 'vds sdfgsdfbdb'),
+(1545, 'Instrumentos', 'views/vcins.php', 1, 10, 'fa fa-solid fa-user', 12, ''),
+(1546, 'Criterios de Evaluación', 'views/vcce.php', 1, 11, 'fa fa-solid fa-print', 12, ''),
+(2001, 'Aspirante', 'views/vasp.php', 1, 1, 'fa fa-solid fa-file-lines  ', 8, ''),
+(2002, 'Horario', 'views/vhorc.php', 1, 2, 'fa fa-solid fa-file-lines', 8, ''),
+(2003, 'Documento', 'views/vdoc.php', 1, 3, 'fa fa-solid fa-file-lines', 8, ''),
+(2004, 'Hoja de Trabajo', 'views/vhdt.php', 1, 4, 'fa fa-solid fa-file-lines', 8, ''),
+(2005, 'Hoja por Usuario', 'views/v', 1, 5, 'fa fa-solid fa-file-lines', 8, ''),
+(2006, 'Usuarios aspirantes (individual)', 'views/vuasp.php', 1, 6, 'fa fa-solid fa-file-lines', 8, ''),
+(2007, 'Carga masiva de usuarios aspirantes', 'views/vcmusua.php', 1, 7, 'fa fa-solid fa-file-lines', 8, ''),
+(2008, 'Flujo', 'views/vflu.php', 1, 8, 'fa fa-solid fa-file-lines', 8, ''),
+(2009, 'Paso', 'views/vpas.php', 1, 9, 'fa fa-solid fa-file-lines', 8, ''),
+(2010, 'Reporte Hoja de trabajo', 'views/vrhdt.php', 1, 10, 'fa fa-solid fa-file-lines', 8, ''),
+(2011, 'Cargar Hoja de trabajo', 'views/vchdt.php', 1, 11, 'fa fa-solid fa-file-lines', 8, ''),
+(2012, 'Cursos complementarios', 'views/vccm.php', 1, 12, 'fa fa-solid fa-file-lines', 8, ''),
+(2013, 'Histórico de Cursos', 'views/vhcm.php', 1, 13, 'fa fa-solid fa-file-lines', 8, ''),
+(2014, 'Empresa', 'views/vemp.php', 1, 14, 'fa fa-solid fa-file-lines', 8, ''),
+(2016, 'Trazabilidad', 'views/vtrc.php', 1, 16, 'fa fa-solid fa-file-lines', 8, ''),
+(2101, 'Ficha', 'views/vficmat.php', 1, 1, 'fa fa-solid fa-file-lines', 9, ''),
+(2102, 'Programa Matrículas', 'views/vprgmat.php', 1, 2, 'fa fa-solid fa-file-lines', 9, ''),
+(2103, 'Registro', 'views/vregm.php', 1, 4, 'fa fa-solid fa-file-lines', 9, ''),
+(2104, 'Flujo Matrículas', 'views/vflumat.php', 1, 5, 'fa fa-solid fa-file-lines', 9, ''),
+(2105, 'Paso Matrículas', 'views/vpasmat.php', 1, 6, 'fa fa-solid fa-file-lines', 9, ''),
+(2106, 'Gestor de matricula', 'views/vgmat.php', 1, 7, 'fa fa-solid fa-file-lines', 9, ''),
+(2107, 'Usuarios individuales', 'views/vusumat.php', 1, 8, 'fa fa-solid fa-file-lines', 9, ''),
+(2108, 'Fichas por usuario', 'views/vfxus.php', 1, 9, 'fa fa-solid fa-file-lines', 9, ''),
+(2109, 'Reporte compromiso', 'views/vrcpr.php', 1, 10, 'fa fa-solid fa-file-lines', 9, ''),
+(2110, 'Reporte gerencial de fichas por inscritos, matriculados', 'views/vrgfi.php', 1, 11, 'fa fa-solid fa-file-lines', 9, ''),
+(2111, 'Documentos a pedir', 'views/vdpdr.php', 1, 12, 'fa fa-solid fa-file-lines', 9, ''),
+(2112, 'Generación del compromiso', 'views/vcpr.php', 1, 13, 'fa fa-solid fa-file-lines', 9, ''),
+(2113, 'Detalle del compromiso', 'views/vdcpr.php', 1, 14, 'fa fa-solid fa-file-lines', 9, ''),
+(2114, 'Carga Masiva Aspirante', 'views/vcmausu.php', 1, 15, 'fa fa-solid fa-file-lines', 9, ''),
+(2115, 'Trazabilidad Matricula', 'views/vtzmat.php', 1, 16, 'fa fa-solid fa-file-lines', 9, ''),
+(2116, 'Carga documentos', 'views/vcmdocmt.php', 1, 17, 'fa fa-solid fa-file-lines', 9, ''),
+(2117, 'Juicio de Evaluación', 'views/vjui.php', 1, 5, 'fa fa-solid fa-user', 12, ''),
+(2201, 'Servicio Soporte', 'views/vsersop.php', 1, 1, 'fa fa-solid fa-user', 10, ''),
+(2202, 'Detalle Soporte', 'views/vgrdtsop.php', 1, 2, 'fa fa-solid fa-user', 10, ''),
+(2203, 'Reporte est personal', 'views/vrppr.php', 1, 3, 'fa fa-solid fa-user', 10, ''),
+(2204, 'Seguimiento Soporte', 'views/vsegsop.php', 1, 4, 'fa fa-solid fa-user', 10, ''),
+(2301, 'Bitacora', 'views/vbit.php', 1, 1, 'fa fa-solid fa-user', 13, ''),
+(2302, 'Solicitud de Certificaciones', 'views/vcerti.php', 1, 2, 'fa fa-solid fa-user', 13, ''),
+(2401, 'Paz y Salvos', 'views/vpys.php', 1, 1, 'fa fa-solid fa-user', 7, ''),
+(2402, 'Aulas Especiales', 'views/vpresp.php', 1, 1, 'fa fa-solid fa-file-lines', 6, '');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla pagper
+-- Estructura de tabla para la tabla `pagper`
 --
 
-CREATE TABLE pagper (
-  idpag bigint(20) NOT NULL,
-  idper int(11) NOT NULL
+CREATE TABLE `pagper` (
+  `idpag` bigint(20) NOT NULL,
+  `idper` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Volcado de datos para la tabla pagper
+-- Volcado de datos para la tabla `pagper`
 --
 
-INSERT INTO pagper (idpag, idper) VALUES
-(1102, 1),
+INSERT INTO `pagper` (`idpag`, `idper`) VALUES
+(1324, 5),
+(1113, 17),
+(1102, 4),
+(1203, 4),
+(1205, 4),
+(1113, 18),
+(1210, 18),
+(1102, 19),
+(1102, 3),
+(1203, 3),
+(1205, 3),
+(1506, 22),
+(1508, 22),
+(1509, 22),
+(1511, 22),
+(1512, 22),
+(1518, 22),
+(1522, 22),
 (1111, 1),
 (1112, 1),
 (1113, 1),
@@ -124,54 +263,155 @@ INSERT INTO pagper (idpag, idper) VALUES
 (1115, 1),
 (1116, 1),
 (1120, 1),
+(1209, 1),
+(1210, 1),
+(1219, 1),
+(1524, 1),
+(1531, 1),
+(1311, 24),
+(1407, 24),
+(2001, 25),
+(2002, 25),
+(2003, 25),
+(2004, 25),
+(2005, 25),
+(2006, 25),
+(2007, 25),
+(2008, 25),
+(2009, 25),
+(2010, 25),
+(2011, 25),
+(2012, 25),
+(2013, 25),
+(2014, 25),
+(2016, 25),
+(2101, 26),
+(2102, 26),
+(2103, 26),
+(2104, 26),
+(2105, 26),
+(2106, 26),
+(2107, 26),
+(2108, 26),
+(2109, 26),
+(2110, 26),
+(2111, 26),
+(2112, 26),
+(2113, 26),
+(2114, 26),
+(2115, 26),
+(2116, 26),
+(1506, 21),
+(1507, 21),
+(1508, 21),
+(1509, 21),
+(1510, 21),
+(1511, 21),
+(1512, 21),
+(1513, 21),
+(1514, 21),
+(1515, 21),
+(1516, 21),
+(1517, 21),
+(1518, 21),
+(1519, 21),
+(1520, 21),
+(1521, 21),
+(1522, 21),
+(1523, 21),
+(1525, 21),
+(1527, 21),
+(1529, 21),
+(1530, 21),
+(1545, 21),
+(1546, 21),
+(2117, 21),
 (1102, 2),
-(1111, 2),
-(1112, 2),
-(1113, 2),
-(1114, 2),
-(1115, 2),
-(1116, 2),
-(1120, 2);
+(1200, 2),
+(1202, 2),
+(1203, 2),
+(1204, 2),
+(1205, 2),
+(1206, 2),
+(1207, 2),
+(1208, 2),
+(1211, 2),
+(1212, 2),
+(1217, 2),
+(1218, 2),
+(1323, 2),
+(2201, 27),
+(2202, 27),
+(2203, 27),
+(2204, 27),
+(1534, 23),
+(1535, 23),
+(2301, 23),
+(2302, 23),
+(2401, 28),
+(1406, 29),
+(1503, 29),
+(1504, 29),
+(1505, 29),
+(1532, 29),
+(1533, 29),
+(2402, 29),
+(1325, 6),
+(1404, 6),
+(1405, 6),
+(1325, 9),
+(1404, 9),
+(1405, 9),
+(1404, 8),
+(1405, 7),
+(1405, 20),
+(1404, 12),
+(1405, 12),
+(1405, 11),
+(1405, 10),
+(1406, 30),
+(1503, 30),
+(2402, 30);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla perfil
+-- Estructura de tabla para la tabla `perfil`
 --
 
-CREATE TABLE perfil (
-  idper int(11) NOT NULL,
-  nomper varchar(70) NOT NULL,
-  pagprin bigint(20) NOT NULL,
-  idpag bigint(20) NOT NULL,
-  idmod int(11) NOT NULL
+CREATE TABLE `perfil` (
+  `idper` int(11) NOT NULL,
+  `nomper` varchar(70) NOT NULL,
+  `pagprin` bigint(20) NOT NULL,
+  `idpag` bigint(20) NOT NULL,
+  `idmod` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla perfil
+-- Volcado de datos para la tabla `perfil`
 --
 
-INSERT INTO perfil (idper, nomper, pagprin, idpag, idmod) VALUES
+INSERT INTO `perfil` (`idper`, `nomper`, `pagprin`, `idpag`, `idmod`) VALUES
 (1, 'Administrador', 1113, 1113, 2),
 (2, 'Cliente', 1208, 1208, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla ubica
+-- Estructura de tabla para la tabla `ubica`
 --
 
-CREATE TABLE ubica (
-  codubi bigint(20) NOT NULL,
-  nomubi varchar(50) NOT NULL,
-  depubi bigint(20) DEFAULT NULL
+CREATE TABLE `ubica` (
+  `codubi` bigint(20) NOT NULL,
+  `nomubi` varchar(50) NOT NULL,
+  `depubi` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla ubica
+-- Volcado de datos para la tabla `ubica`
 --
 
-INSERT INTO ubica (codubi, nomubi, depubi) VALUES
+INSERT INTO `ubica` (`codubi`, `nomubi`, `depubi`) VALUES
 (5, 'ANTIOQUIA', 0),
 (8, 'ATLANTICO', 0),
 (11, 'BOGOTA D.C.', 0),
@@ -1334,216 +1574,246 @@ INSERT INTO ubica (codubi, nomubi, depubi) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla usuario
+-- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE usuario (
-  idusu bigint(20) NOT NULL,
-  ndocusu bigint(20) NOT NULL,
-  nomusu varchar(70) NOT NULL,
-  idper int(11) NOT NULL,
-  pasusu varchar(70) NOT NULL,
-  emausu varchar(70) DEFAULT NULL,
-  idcen int(11) NOT NULL,
-  actusu tinyint(1) NOT NULL,
-  fotcan varchar(255) DEFAULT NULL,
-  telcan varchar(15) DEFAULT NULL,
-  noca varchar(3) DEFAULT NULL,
-  colfon varchar(6) NOT NULL DEFAULT '666666',
-  coltex varchar(50) NOT NULL DEFAULT '000000',
-  fecsol datetime DEFAULT NULL,
-  keyolv varchar(255) DEFAULT NULL,
-  bloqkey tinyint(1) NOT NULL DEFAULT 1
+CREATE TABLE `usuario` (
+  `idusu` bigint(20) NOT NULL,
+  `ndocusu` bigint(20) NOT NULL,
+  `nomusu` varchar(70) NOT NULL,
+  `idper` int(11) NOT NULL,
+  `pasusu` varchar(70) NOT NULL,
+  `emausu` varchar(70) DEFAULT NULL,
+  `actusu` tinyint(1) NOT NULL,
+  `telcan` varchar(15) DEFAULT NULL,
+  `colfon` varchar(6) NOT NULL DEFAULT '666666',
+  `coltex` varchar(50) NOT NULL DEFAULT '000000',
+  `fecsol` datetime DEFAULT NULL,
+  `keyolv` varchar(255) DEFAULT NULL,
+  `bloqkey` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla usuario
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO usuario (idusu, ndocusu, nomusu, idper, pasusu, emausu, idcen, actusu, fotcan, telcan, noca, colfon, coltex, fecsol, keyolv, bloqkey) VALUES
-(1, 123456, 'ROBINSON ENRIQUE RINCÓN RAMÍREZ', 1, '10470c3b4b1fed12c3baac014be15fac67c6e815', 'rinconrobix@gmail.com', 951310, 1, 'fcan/80546098.png', '3108775481', '', 'ffffff', '0000ff;font-weight: bold', '2025-03-13 13:31:56', '09fef7379a374cb04935f529c90d4d62a55eb112', 1);
+INSERT INTO `usuario` (`idusu`, `ndocusu`, `nomusu`, `idper`, `pasusu`, `emausu`, `actusu`, `telcan`, `colfon`, `coltex`, `fecsol`, `keyolv`, `bloqkey`) VALUES
+(1, 123456, 'LISSETTE RINCÓN RAMÍREZ', 1, '10470c3b4b1fed12c3baac014be15fac67c6e815', 'liss1703@gmail.com', 1, '3192060154', 'ffffff', '0000ff;font-weight: bold', '2025-03-13 13:31:56', '09fef7379a374cb04935f529c90d4d62a55eb112', 1),
+(2, 222, 'Prueba', 1, '51475f6ee6eaac049c0df364ee277f020e036c65', 'rinconrobix@gmail.com', 1, '222222', '666666', '000000', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla usupef
+-- Estructura de tabla para la tabla `usupef`
 --
 
-CREATE TABLE usupef (
-  idusu bigint(20) NOT NULL,
-  idper int(11) NOT NULL
+CREATE TABLE `usupef` (
+  `idusu` bigint(20) NOT NULL,
+  `idper` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla usupef
+-- Volcado de datos para la tabla `usupef`
 --
 
-INSERT INTO usupef (idusu, idper) VALUES
+INSERT INTO `usupef` (`idusu`, `idper`) VALUES
 (1, 2),
 (1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla valor
+-- Estructura de tabla para la tabla `valor`
 --
 
-CREATE TABLE valor (
-  idval int(11) NOT NULL,
-  nomval varchar(255) NOT NULL,
-  iddom int(11) NOT NULL,
-  parval varchar(255) NOT NULL,
-  act tinyint(1) NOT NULL,
-  nhora int(11) DEFAULT NULL,
-  novam varchar(255) DEFAULT NULL
+CREATE TABLE `valor` (
+  `idval` int(11) NOT NULL,
+  `nomval` varchar(255) NOT NULL,
+  `iddom` int(11) NOT NULL,
+  `parval` varchar(255) NOT NULL,
+  `act` tinyint(1) NOT NULL,
+  `nhora` int(11) DEFAULT NULL,
+  `novam` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla valor
+-- Volcado de datos para la tabla `valor`
 --
 
-INSERT INTO valor (idval, nomval, iddom, parval, act, nhora, novam) VALUES
+INSERT INTO `valor` (`idval`, `nomval`, `iddom`, `parval`, `act`, `nhora`, `novam`) VALUES
 (1801, 'CC', 1, '', 1, 0, ''),
 (1802, 'TI', 1, '', 1, 0, ''),
 (1803, 'CE', 1, '', 1, 0, ''),
-(1804, 'Pasaporte', 1, '', 1, 0, '');
+(1804, 'Pasaporte', 1, '', 1, 0, ''),
+(1805, 'Gerencia General', 5, '', 1, NULL, NULL),
+(1806, 'E-Commerce', 5, '', 1, NULL, NULL),
+(1807, 'Contabilidad', 5, '', 1, NULL, NULL),
+(1808, 'Cuenta por paga a 30 dias', 6, '', 1, NULL, NULL),
+(1809, 'Contado Completo', 6, '', 1, NULL, NULL),
+(1810, 'Contado Anticipo 50% y Saldo 50%', 6, '', 1, NULL, NULL),
+(1811, 'Regulador o Estabilizador', 7, '', 1, NULL, NULL),
+(1812, 'Transformador de Aislamiento', 7, '', 1, NULL, NULL),
+(1813, 'UPS Online', 7, '', 1, NULL, NULL),
+(1814, 'UPS Interactiva', 7, '', 1, NULL, NULL),
+(1815, 'Bateria Seca', 7, '', 1, NULL, NULL),
+(1816, 'Banco de Baterias', 7, '', 1, NULL, NULL),
+(1817, 'Regulador Monofasico', 8, '', 1, NULL, NULL),
+(1818, 'Regulador Bifasico', 8, '', 1, NULL, NULL),
+(1819, 'Regulador Trifasico', 8, '', 1, NULL, NULL),
+(1820, 'Transformador de Aislamiento Monofasico', 9, '', 1, NULL, NULL),
+(1821, 'Transformador de Aislamiento Bifasico', 9, '', 1, NULL, NULL),
+(1822, 'Transformador de Aislamiento Trifasico', 9, '', 1, NULL, NULL),
+(1823, 'Autotransformador Monofasico', 10, '', 1, NULL, NULL),
+(1824, 'Autotransformador Bifasico', 10, '', 1, NULL, NULL),
+(1825, 'Autotransformador Trifasico', 10, '', 1, NULL, NULL),
+(1826, 'UPS Online Monofasico', 11, '', 1, NULL, NULL),
+(1827, 'UPS Online Bifasico', 11, '', 1, NULL, NULL),
+(1828, 'UPS Online Trifasico', 11, '', 1, NULL, NULL),
+(1829, 'UPS Interactiva Monofasica', 12, '', 1, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
 --
---
--- Indices de la tabla configuracion
---
-ALTER TABLE configuracion
-  ADD PRIMARY KEY (idcof);
 
 --
--- Indices de la tabla dominio
+-- Indices de la tabla `configuracion`
 --
-ALTER TABLE dominio
-  ADD PRIMARY KEY (iddom);
+ALTER TABLE `configuracion`
+  ADD PRIMARY KEY (`idcof`);
 
 --
--- Indices de la tabla modulo
+-- Indices de la tabla `dominio`
 --
-ALTER TABLE modulo
-  ADD PRIMARY KEY (idmod),
-  ADD KEY idper (idper);
+ALTER TABLE `dominio`
+  ADD PRIMARY KEY (`iddom`);
 
 --
--- Indices de la tabla pagina
+-- Indices de la tabla `modulo`
 --
-ALTER TABLE pagina
-  ADD PRIMARY KEY (idpag),
-  ADD KEY idmod (idmod);
+ALTER TABLE `modulo`
+  ADD PRIMARY KEY (`idmod`),
+  ADD KEY `idper` (`idper`);
 
 --
--- Indices de la tabla pagper
+-- Indices de la tabla `pagina`
 --
-ALTER TABLE pagper
-  ADD KEY idpag (idpag),
-  ADD KEY idper (idper);
+ALTER TABLE `pagina`
+  ADD PRIMARY KEY (`idpag`),
+  ADD KEY `idmod` (`idmod`);
 
 --
--- Indices de la tabla perfil
+-- Indices de la tabla `pagper`
 --
-ALTER TABLE perfil
-  ADD PRIMARY KEY (idper),
-  ADD KEY pagprin (pagprin),
-  ADD KEY idmod (idmod);
+ALTER TABLE `pagper`
+  ADD KEY `idpag` (`idpag`),
+  ADD KEY `idper` (`idper`);
 
 --
--- Indices de la tabla ubica
+-- Indices de la tabla `perfil`
 --
-ALTER TABLE ubica
-  ADD PRIMARY KEY (codubi),
-  ADD KEY fkubi (depubi);
+ALTER TABLE `perfil`
+  ADD PRIMARY KEY (`idper`),
+  ADD KEY `pagprin` (`pagprin`),
+  ADD KEY `idmod` (`idmod`);
 
 --
--- Indices de la tabla usuario
+-- Indices de la tabla `ubica`
 --
-ALTER TABLE usuario
-  ADD PRIMARY KEY (idusu),
-  ADD UNIQUE KEY ndocusu (ndocusu),
-  ADD KEY idper (idper),
-  ADD KEY idcen (idcen);
-
+ALTER TABLE `ubica`
+  ADD PRIMARY KEY (`codubi`),
+  ADD KEY `fkubi` (`depubi`);
 
 --
--- Indices de la tabla usupef
+-- Indices de la tabla `usuario`
 --
-ALTER TABLE usupef
-  ADD KEY idusu (idusu),
-  ADD KEY idper (idper);
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idusu`),
+  ADD UNIQUE KEY `ndocusu` (`ndocusu`),
+  ADD KEY `idper` (`idper`);
 
 --
--- Indices de la tabla valor
+-- Indices de la tabla `usupef`
 --
-ALTER TABLE valor
-  ADD PRIMARY KEY (idval),
-  ADD KEY FK_iddom (iddom);
+ALTER TABLE `usupef`
+  ADD KEY `idusu` (`idusu`),
+  ADD KEY `idper` (`idper`);
+
+--
+-- Indices de la tabla `valor`
+--
+ALTER TABLE `valor`
+  ADD PRIMARY KEY (`idval`),
+  ADD KEY `FK_iddom` (`iddom`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
---
--- AUTO_INCREMENT de la tabla configuracion
---
-ALTER TABLE configuracion
-  MODIFY idcof int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla dominio
+-- AUTO_INCREMENT de la tabla `configuracion`
 --
-ALTER TABLE dominio
-  MODIFY iddom int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `configuracion`
+  MODIFY `idcof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla modulo
+-- AUTO_INCREMENT de la tabla `dominio`
 --
-ALTER TABLE modulo
-  MODIFY idmod int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `dominio`
+  MODIFY `iddom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla pagina
+-- AUTO_INCREMENT de la tabla `modulo`
 --
-ALTER TABLE pagina
-  MODIFY idpag bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2403;
+ALTER TABLE `modulo`
+  MODIFY `idmod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla perfil
+-- AUTO_INCREMENT de la tabla `pagina`
 --
-ALTER TABLE perfil
-  MODIFY idper int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+ALTER TABLE `pagina`
+  MODIFY `idpag` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2403;
 
 --
--- AUTO_INCREMENT de la tabla usuario
+-- AUTO_INCREMENT de la tabla `perfil`
 --
-ALTER TABLE usuario
-  MODIFY idusu bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `perfil`
+  MODIFY `idper` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT de la tabla valor
+-- AUTO_INCREMENT de la tabla `usuario`
 --
-ALTER TABLE valor
-  MODIFY idval int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `usuario`
+  MODIFY `idusu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `valor`
+--
+ALTER TABLE `valor`
+  MODIFY `idval` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1830;
 
 --
 -- Restricciones para tablas volcadas
 --
---
--- Filtros para la tabla pagper
---
-ALTER TABLE pagper
-  ADD CONSTRAINT pagper_ibfk_1 FOREIGN KEY (idpag) REFERENCES pagina (idpag);
---
--- Filtros para la tabla perfil
---
-ALTER TABLE perfil
-  ADD CONSTRAINT perfil_ibfk_1 FOREIGN KEY (idmod) REFERENCES modulo (idmod);
 
 --
--- Filtros para la tabla valor
+-- Filtros para la tabla `pagper`
 --
-ALTER TABLE valor
-  ADD CONSTRAINT valor_ibfk_1 FOREIGN KEY (iddom) REFERENCES dominio (iddom);
+ALTER TABLE `pagper`
+  ADD CONSTRAINT `pagper_ibfk_1` FOREIGN KEY (`idpag`) REFERENCES `pagina` (`idpag`);
+
+--
+-- Filtros para la tabla `perfil`
+--
+ALTER TABLE `perfil`
+  ADD CONSTRAINT `perfil_ibfk_1` FOREIGN KEY (`idmod`) REFERENCES `modulo` (`idmod`);
+
+--
+-- Filtros para la tabla `valor`
+--
+ALTER TABLE `valor`
+  ADD CONSTRAINT `valor_ibfk_1` FOREIGN KEY (`iddom`) REFERENCES `dominio` (`iddom`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

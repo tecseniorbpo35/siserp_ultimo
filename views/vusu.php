@@ -27,13 +27,6 @@
 						<?php }} ?>
 					</select>
 				</div>
-				<!--<div class="form-group col-md-6">
-                    <label for="fotcan">Foto</label>
-                    <?php if($datOne AND $datOne[0]['fotcan']){ ?>
-                        <input type="hidden" name="fotcan" id="fotcan" value="<?=$datOne[0]['fotcan'];?>">
-                    <?php } ?>
-                    <input type="file" name="foto" id="fotcan" class="form-control" accept="image/png, image/jpeg">
-                </div>-->
 				<div class="form-group col-md-6">
 					<label for="pasusu">Contraseña</label>
 					<input type="password" name="pasusu" id="pasusu" maxlength="70" class="form-control" <?php if(!$datOne) echo "required"; ?>>
@@ -46,23 +39,6 @@
 					<label for="nomusu">Teléfono</label>
 					<input type="number" name="telcan" id="telcan" max="9999999999999" class="form-control" value="<?php if($datOne) echo $datOne[0]['telcan']; ?>">
 				</div>
-				<!--<div class="form-group col-md-6">
-					<label for="noca">No. Candidato</label>
-					<input type="text" name="noca" id="noca" maxlength="3" class="form-control" value="<?php if($datOne) echo $datOne[0]['noca']; ?>">
-				</div>
-				<div class="form-group col-md-6">
-					<label for="idcen">Centro de Formación</label>
-					<select name="idcen" id="idcen" class="form-select">
-						<?php
-						if($dce){
-							foreach ($dce as $de) {
-						?>
-								<option value="<?=$de['idcen'];?>"
-									<?php if($datOne && $datOne[0]['idcen']==$de['idcen']) echo " selected "; ?>
-								><?=$de['nomcen'];?></option>
-						<?php }} ?>
-					</select>
-				</div>-->
 				<div class="form-group col-md-6">
 					<label for="actusu">¿Activo?</label>
 					<select name="actusu" id="actusu" class="form-select">
@@ -88,32 +64,19 @@
 	</div>
 </div>
 
-<!--<br><br>
+<!--
+<br><br>
 <h3>Ver usuarios</h3>
 
 <form name="frm1" action="home.php?pg=<?=$pg;?>" method="POST">
 	<div class="row">
 		<div class="form-group col-md-6">
-			<label for="txt">Ingrese No. de Documento o ficha a buscar</label>
+			<label for="txt">Ingrese No. de Documento</label>
 			<input type="text" name="nodocfil" id="txt" class="form-control" onchange="this.form.submit();">
 		</div>
-		<div class="form-group col-md-6">
-			<label for="combobox">Seleccione Ficha a buscar</label>
-			<select name="idficfil" id="combobox" class="form-select" onchange="this.form.submit();">
-				<option value="0"></option>
-				<?php
-				if($dfi){
-					foreach ($dfi as $de) {
-				?>
-						<option value="<?=$de['idfic'];?>"
-							<?php if($datOne && $datOne[0]['idfic']==$de['idfic']) echo " selected "; ?>
-						><?=$de['idfic'];?> - <?=$de['nomfic'];?> <?=$de['nomval'];?></option>
-				<?php }} ?>
-			</select>
-		</div>
 	</div>
-</form>-->
-
+</form>
+-->
 
 <?php
 $idusuanterior=NULL;
@@ -123,7 +86,6 @@ $idusuanterior=NULL;
         <thead>
             <tr>
                 <th>Perfil</th>
-                <!--<th>Foto</th>-->
                 <th>Usuario</th>
                 <th>E-mail</th>
                 <th>No. Telefónico</th>
@@ -140,13 +102,6 @@ $idusuanterior=NULL;
 				<td>
 					<?=$d['nomper'];?>
 				</td>
-			<td>
-				<?php if(file_exists($d['fotcan'])){ ?>
-					<img src="<?=$d['fotcan'];?>" width="70px"; />
-					<?php }else{ ?>
-						<img src="img/user.jpg" width="70px"; />
-					<?php } ?>
-			</td>
 			<td>
 				<?=$d['nomusu'];?><br>
 					<small>
@@ -186,7 +141,6 @@ $idusuanterior=NULL;
     <tfoot>
         <tr>
             <th>Perfil</th>
-            <!--<th>Foto</th>-->
             <th>Usuario</th>
             <th>E-mail</th>
             <th>No. Telefónico</th>
@@ -197,8 +151,8 @@ $idusuanterior=NULL;
     </table>
 <?php } ?>
 
-
-<!--<br><br>
+<!--
+<br><br>
 <h3>Cambiar contraseñas masivas</h3>
 <div style="float: left;width: 100%;padding: 0px 10px 100px 10px;">
 	<div class="inser">
@@ -220,4 +174,5 @@ $idusuanterior=NULL;
 			</div>
 		</form>
 	</div>
-</div>-->
+</div>
+-->
